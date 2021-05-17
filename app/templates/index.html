@@ -1,0 +1,56 @@
+{% extends './body.html' %}
+
+{% block title %} Index {% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12"></div>
+        <h1>Libreria </h1>
+        {% with messages=get_flashed_messages() %}
+       
+        {% if messages %}
+        <br>
+        {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <strong style='font-size: 14px;'>{{ message}}</strong> 
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+         </div>
+        
+        {% endfor %}
+        
+        {% endif %}
+        
+        {% endwith %}
+    </div>
+    <hr>
+    <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <h2>{{data.titulo}}</h2>
+    </div>
+
+    {% if current_user.tipousuario.id==1 %}
+
+    {% if data.libros_vendidos | length > 0 %}
+    
+    {% else %}
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <h2>aun no existen libros vendidos</h2>
+    </div>
+    {% endif %}
+    
+    {% else %}
+
+    {% if data.compras | length > 0 %}
+    
+    {% else %}
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <h2>aun no has comprado libros..</h2>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    </div>
+
+{% endblock %}
